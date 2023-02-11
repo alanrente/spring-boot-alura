@@ -27,4 +27,11 @@ public class MedicoEntity {
     @Embedded
     private EnderecoEntity endereco;
 
+    public MedicoEntity(DadosCadastroMedico dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.crm = dados.crm();
+        this.endereco = new EnderecoEntity(dados.endereco());
+        this.especialidade = dados.especialidade();
+    }
 }
