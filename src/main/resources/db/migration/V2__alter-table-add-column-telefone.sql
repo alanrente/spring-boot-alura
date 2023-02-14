@@ -1,0 +1,1 @@
+alter table `MEDICO_TB` add column telefone varchar(20) not null;
