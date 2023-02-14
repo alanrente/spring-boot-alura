@@ -21,6 +21,13 @@ public class MedicoController {
     @GetMapping
     public Page<DadosListageMedico> listar(Pageable paginacao) {
 
+        /*
+        * Paginação, ordenação e qtd por página, são definidos na URL com os atributos:
+        * - size: para qtd por página;
+        * - page: para a página (padrão "0") e
+        * - sort: passando o nome do atributo desejado na ordenação (ex: "sort=nome", por padrão é crescente mas podemos inverter ex: "sort=nome,desc")
+        * Exemplo da url http://localhost:8080/medicos?size=10&page=0&sort=nome
+        */
         return repository.findAll(paginacao).map(DadosListageMedico::new);
     }
 
