@@ -41,12 +41,16 @@ public class MedicoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public void atualizar(@PathVariable String id, @RequestBody @Valid AtualizaMedicoDTO dados) {
+    public void atualizar(@PathVariable Long id, @RequestBody @Valid AtualizaMedicoDTO dados) {
 
-        var idNumber = Long.parseLong(id);
-
-        var medico = repository.getReferenceById(idNumber);
+        var medico = repository.getReferenceById(id);
         medico.atualiza(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void desativar(@PathVariable Long id) {
+        System.out.println("id: " + id);
     }
 
 }
