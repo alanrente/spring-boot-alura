@@ -27,7 +27,7 @@ public class MedicoController {
         *   Exemplo da url http://localhost:8080/medicos?size=10&page=0&sort=nome
         *   também podemos utilizar a anotação @PageableDefault passando para elas um padrão, caso não venha os mesmos na url ex: @PageableDefault(size = 10, sort = {"nome"})
         */
-        return repository.findAll(paginacao).map(DadosListageMedico::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListageMedico::new);
     }
 
     @PostMapping
@@ -50,7 +50,8 @@ public class MedicoController {
     @DeleteMapping("/{id}")
     @Transactional
     public void desativar(@PathVariable Long id) {
-        System.out.println("id: " + id);
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
     }
 
 }

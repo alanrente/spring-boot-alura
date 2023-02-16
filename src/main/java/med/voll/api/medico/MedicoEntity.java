@@ -29,6 +29,8 @@ public class MedicoEntity {
     @Embedded
     private EnderecoEntity endereco;
 
+    private Boolean ativo;
+
     public MedicoEntity(DadosCadastroMedico dados) {
         this.nome = dados.nome();
         this.email = dados.email();
@@ -36,6 +38,7 @@ public class MedicoEntity {
         this.crm = dados.crm();
         this.endereco = new EnderecoEntity(dados.endereco());
         this.especialidade = dados.especialidade();
+        this.ativo = true;
     }
 
     public void atualiza(AtualizaMedicoDTO dados) {
@@ -50,5 +53,9 @@ public class MedicoEntity {
         if (dados.endereco() != null) {
             this.endereco.atualiza(dados.endereco());
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }
