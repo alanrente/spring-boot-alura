@@ -1,10 +1,7 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
-import med.voll.api.medico.DadosCadastroMedico;
-import med.voll.api.medico.DadosListageMedico;
-import med.voll.api.medico.MedicoEntity;
-import med.voll.api.medico.MedicoRepository;
+import med.voll.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +37,16 @@ public class MedicoController {
         System.out.println(dados);
 
         repository.save(new MedicoEntity(dados));
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void atualizar(@PathVariable String id, @RequestBody @Valid AtualizaMedicoDTO dados) {
+
+        var idNumber = Long.parseLong(id);
+
+        var medico = repository.getReferenceById(idNumber);
+        medico.atualiza(dados);
     }
 
 }
